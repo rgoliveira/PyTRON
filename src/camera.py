@@ -15,26 +15,26 @@ class Camera:
         self.viewport = viewport
         self.gameArea = gameArea
         self.direction = Direction()
-        self.player = None
+        self.boundPlayer = None
     
     def bindToPlayer(self, player):
-        self.player = player
+        self.boundPlayer = player
         self.direction = player.direction
     
     def unbindFromPlayer(self):
-        self.player = None
+        self.boundPlayer = None
         self.direction = Direction()
     
     def changeMode(self):
         self.mode = (self.mode % 2) + 1
 
     def set(self):
-        if (self.player != None):
+        if (self.boundPlayer != None):
             # self.direction doesn't to be set everytime, since it's a reference
-            # to self.player.direction. That's not the case for self.x and 
+            # to self.boundPlayer.direction. That's not the case for self.x and 
             # self.y, since they're integers.
-            self.x = self.player.x
-            self.y = self.player.y
+            self.x = self.boundPlayer.x
+            self.y = self.boundPlayer.y
 
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
@@ -45,7 +45,7 @@ class Camera:
         elif (self.mode == CM_Perspective):
             gluPerspective(120.0, self.viewport[0]/float(self.viewport[1]), 1, 100.0)
             glRotate(-70, 1, 0, 0) # set camera from behind
-            distanceFromPlayer = 3
+            distanceFromPlayer = 5
             adjustmentX = 0
             adjustmentY = 0
             if (self.direction.current() == NORTH):
