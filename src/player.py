@@ -33,6 +33,7 @@ class Player:
         glRotate(90, 1, 0, 0)
         glTranslate(self.x, self.y, 0)
         glRotate(-90 * self.direction.current(), 0, 0, 1)
+        glScalef(3, 3, 3)
         glCallList(self.model.gl_list)
         glPopMatrix()
 
