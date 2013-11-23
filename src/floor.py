@@ -4,7 +4,7 @@ from filenames import *
 
 class Floor:
     def __init__(self, size, tileSize, y = 0):
-        self.size = tileSize
+        self.size = size
         self.tileSize = tileSize
         self.width = self.depth = size * tileSize
         self.y = 0
@@ -13,7 +13,6 @@ class Floor:
     def draw(self):
         glEnable(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, self.texture)
-
         glPushMatrix()
         for i in range(self.size):
             for j in range(self.size):
@@ -34,8 +33,5 @@ class Floor:
                 glNormal3f(0.0,1.0,0.0)
                 glVertex3f(i*self.size, self.y, j*self.size + self.size)
                 glEnd()
-        
-        glColor3f(1., 1., 1.);
-        glLineWidth(2)
         glPopMatrix()
         glDisable(GL_TEXTURE_2D)
