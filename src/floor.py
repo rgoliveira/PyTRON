@@ -19,19 +19,19 @@ class Floor:
                 glBegin(GL_QUADS)
                 glTexCoord2f(0.0, 0.0);
                 glNormal3f(0.0,1.0,0.0)
-                glVertex3f(i*self.size, self.y, j*self.size)
+                glVertex3f(i*self.tileSize, self.y, j*self.tileSize)
                 
                 glTexCoord2f(1.0, 0.0)
                 glNormal3f(0.0,1.0,0.0)
-                glVertex3f(i*self.size + self.size, self.y, j*self.size)
+                glVertex3f(i*self.tileSize + self.tileSize, self.y, j*self.tileSize)
 
                 glTexCoord2f(1.0, 1.0)
                 glNormal3f(0.0,1.0,0.0)
-                glVertex3f(i*self.size + self.size, self.y, j*self.size + self.size)
+                glVertex3f(i*self.tileSize + self.tileSize, self.y, j*self.tileSize + self.tileSize)
 
                 glTexCoord2f(0.0, 1.0)
                 glNormal3f(0.0,1.0,0.0)
-                glVertex3f(i*self.size, self.y, j*self.size + self.size)
+                glVertex3f(i*self.tileSize, self.y, j*self.tileSize + self.tileSize)
                 glEnd()
         glPopMatrix()
         glDisable(GL_TEXTURE_2D)
