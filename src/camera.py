@@ -7,12 +7,13 @@ CM_Ortho        = 1
 CM_Perspective  = 2
 
 class Camera:
-    def __init__(self, viewport = (800, 600)):
+    def __init__(self, viewport = (800, 600), gameArea = (800, 600)):
         self.mode = CM_Ortho
         self.x = 0
         self.y = 0
         self.z = 5
         self.viewport = viewport
+        self.gameArea = gameArea
         self.direction = Direction()
         self.player = None
     
@@ -38,7 +39,8 @@ class Camera:
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
         if (self.mode == CM_Ortho):
-            glOrtho(-10, 810, -10, 610, -5, 100)
+            offset = 10
+            glOrtho(-offset, self.gameArea[0] + offset, -offset, self.gameArea[1] + offset, -5, 10)
             glRotate(0, 0, 0, 1)
         elif (self.mode == CM_Perspective):
             gluPerspective(120.0, self.viewport[0]/float(self.viewport[1]), 1, 100.0)

@@ -30,10 +30,10 @@ def setup():
     player  = Player()
     
     global floor
-    floor   = Floor(10, 10)
+    floor   = Floor(size=20, tileSize=10)
     
     global camera
-    camera  = Camera(viewport)
+    camera  = Camera(viewport, (floor.size*floor.tileSize, floor.size*floor.tileSize))
     camera.bindToPlayer(player)
 
 def drawAxis():
