@@ -1,0 +1,32 @@
+# Blender MTL File: 'bicycle.blend'
+# Material Count: 3
+
+newmtl Paint
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 0.000000 0.009645
+Ks 0.500000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd bicycle_katia.png
+
+newmtl Rubber
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.037408 0.037408 0.037408
+Ks 0.147842 0.147842 0.147842
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd bicycle_katia.png
+
+newmtl Steel
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.334315 0.334315 0.334315
+Ks 0.750000 0.750000 0.750000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd bicycle_katia.png
