@@ -14,24 +14,22 @@ class Floor:
         glEnable(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, self.texture)
         glPushMatrix()
-        for i in range(self.size):
-            for j in range(self.size):
-                glBegin(GL_QUADS)
-                glTexCoord2f(0.0, 0.0);
-                glNormal3f(0.0,1.0,0.0)
-                glVertex3f(i*self.tileSize, self.y, j*self.tileSize)
-                
-                glTexCoord2f(1.0, 0.0)
-                glNormal3f(0.0,1.0,0.0)
-                glVertex3f(i*self.tileSize + self.tileSize, self.y, j*self.tileSize)
-
-                glTexCoord2f(1.0, 1.0)
-                glNormal3f(0.0,1.0,0.0)
-                glVertex3f(i*self.tileSize + self.tileSize, self.y, j*self.tileSize + self.tileSize)
-
-                glTexCoord2f(0.0, 1.0)
-                glNormal3f(0.0,1.0,0.0)
-                glVertex3f(i*self.tileSize, self.y, j*self.tileSize + self.tileSize)
-                glEnd()
+        glBegin(GL_QUADS)
+        glTexCoord2d(0.0, 0.0)
+        glNormal3f(0., 1., 0.)
+        glVertex3f(0, self.y, 0)
+        
+        glTexCoord2f(1.0*self.size, 0.0)
+        glNormal3f(0.0,1.0,0.0)
+        glVertex3f(self.size*self.tileSize, self.y, 0)
+        
+        glTexCoord2f(1.0*self.size, 1.0*self.size)
+        glNormal3f(0.0,1.0,0.0)
+        glVertex3f(self.size*self.tileSize, self.y, self.size*self.tileSize)
+        
+        glTexCoord2f(0.0, 1.0*self.size)
+        glNormal3f(0.0,1.0,0.0)
+        glVertex3f(0, self.y, self.size*self.tileSize)
+        glEnd()
         glPopMatrix()
         glDisable(GL_TEXTURE_2D)
