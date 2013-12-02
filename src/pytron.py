@@ -35,6 +35,9 @@ def setup():
     global camera
     camera  = Camera(viewport, (floor.size*floor.tileSize, floor.size*floor.tileSize))
     camera.bindToPlayer(player)
+    
+    global playerEnabled
+    playerEnabled = True
 
 def drawAxis():
     glPushMatrix()
@@ -110,7 +113,7 @@ def run():
             handleInputEvent(e)
 
         ### game logic
-        player.step()
+        player.step(playerEnabled)
 
         ### drawing
         render()
