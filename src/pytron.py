@@ -131,7 +131,7 @@ def handleInputEvent(e):
 def run():
     setup()
     while 1:
-        clock.tick(60)
+        clock.tick(100)
         
         ### handle inputs
         for e in pygame.event.get():

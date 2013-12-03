@@ -66,6 +66,7 @@ class Player:
         self.trailPoints = []
         self.saveTrailPoint()
         self.killed = False
+        self.trailMatrix = []
         
     def saveTrailPoint(self):
         self.trailPoints.append((self.x, self.y))
@@ -79,7 +80,7 @@ class Player:
         self.saveTrailPoint()
         
     def step(self, enabled = True):
-
+#        if(self.railMatrix[self.x]
         if((self.x > 200 or self.x < 0) or (self.y > 200 or self.y < 0)):
             self.killed = True
         else:			
