@@ -87,6 +87,8 @@ class Player:
         self.saveTrailPoint()
         
     def step(self, enabled = True):
+        if((self.x > 200 or self.x < 0) or (self.y > 200 or self.y < 0)):
+            self.kill()		
         if (not enabled):
             return
         increment = 0.5
@@ -98,7 +100,16 @@ class Player:
             self.x += increment
         elif (self.direction.current() == WEST):
             self.x -= increment
-    
+            
+
+    def kill(self):
+        self.x = 0.
+        self.y = 0.
+        self.z = 0.
+        self.direction = Direction()
+        self.trailPoints = []
+        self.saveTrailPoint()		
+
     def draw(self):
         glPushMatrix()
         glRotate(90, 1, 0, 0)
