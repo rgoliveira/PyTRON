@@ -66,7 +66,7 @@ class Player:
         self.trailPoints = []
         self.saveTrailPoint()
         self.killed = False
-        self.trailMatrix = []
+        self.trailMatrix = {}
         
     def saveTrailPoint(self):
         self.trailPoints.append((self.x, self.y))
@@ -80,7 +80,11 @@ class Player:
         self.saveTrailPoint()
         
     def step(self, enabled = True):
-#        if(self.railMatrix[self.x]
+        if(not self.trailMatrix.has_key(self.x)):
+           self.trailMatrix[self.x] = [self.y]
+        else:
+           self.trailMatrix[self.x].append(self.y)
+#        print "{0}".format(self.trailMatrix[self.x])
         if((self.x > 200 or self.x < 0) or (self.y > 200 or self.y < 0)):
             self.killed = True
         else:			
@@ -95,18 +99,10 @@ class Player:
                  self.x += increment
             elif (self.direction.current() == WEST):
                  self.x -= increment
-        i = 1
-        crashed = False
-        while(i < len(self.trailPoints) - 1):
-            if(self.x == self.trailPoints[i][0] and self.x == self.trailPoints[i+1][0]):
-               if(self.y >= self.trailPoints[i][1] and self.y <= self.trailPoints[i+1][1]) or (self.y >= self.trailPoints[i+1][1] and self.y <= self.trailPoints[i][1]):
-                    crashed = True
-            if(self.y == self.trailPoints[i][1] and self.y == self.trailPoints[i+1][1]):
-               if(self.x >= self.trailPoints[i][0] and self.x <= self.trailPoints[i+1][0]) or (self.x >= self.trailPoints[i+1][0] and self.x <= self.trailPoints[i][0]):
-                    crashed = True
-            i += 1 
-        if(crashed):
-           self.killed = True		
+
+            if(self.trailMatrix.has_key(self.x)):
+               if(self.y in self.trailMatrix[self.x]):
+                 self.killed = True	
 
     def reset(self):
         self.x = 0.
@@ -116,6 +112,8 @@ class Player:
         self.trailPoints = []
         self.saveTrailPoint()	
         self.killed = False
+        self.trailMatrix = {}
+		
 
     def was_killed(self):
         return 	self.killed
