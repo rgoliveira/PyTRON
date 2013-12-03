@@ -111,7 +111,11 @@ def run():
             handleInputEvent(e)
 
         ### game logic
-        player.step(playerEnabled)
+        if(not player.was_killed()):
+            player.step(playerEnabled)
+        else:
+           player.reset()
+           camera.bindToPlayer(player)
 
         ### drawing
         render()

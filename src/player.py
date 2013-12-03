@@ -74,6 +74,7 @@ class Player:
         self.direction = Direction()
         self.trailPoints = []
         self.saveTrailPoint()
+        self.killed = False
         
     def saveTrailPoint(self):
         self.trailPoints.append((self.x, self.y))
@@ -88,27 +89,32 @@ class Player:
         
     def step(self, enabled = True):
         if((self.x > 200 or self.x < 0) or (self.y > 200 or self.y < 0)):
-            self.kill()		
-        if (not enabled):
-            return
-        increment = 0.5
-        if (self.direction.current() == NORTH):
-            self.y += increment
-        elif (self.direction.current() == SOUTH):
-            self.y -= increment
-        elif (self.direction.current() == EAST):
-            self.x += increment
-        elif (self.direction.current() == WEST):
-            self.x -= increment
+            self.killed = True
+        else:			
+            if (not enabled):
+              return
+            increment = 0.5
+            if (self.direction.current() == NORTH):
+                 self.y += increment
+            elif (self.direction.current() == SOUTH):
+                 self.y -= increment
+            elif (self.direction.current() == EAST):
+                 self.x += increment
+            elif (self.direction.current() == WEST):
+                 self.x -= increment
             
 
-    def kill(self):
+    def reset(self):
         self.x = 0.
         self.y = 0.
         self.z = 0.
         self.direction = Direction()
         self.trailPoints = []
-        self.saveTrailPoint()		
+        self.saveTrailPoint()	
+        self.killed = False
+
+    def was_killed(self):
+        return 	self.killed
 
     def draw(self):
         glPushMatrix()
