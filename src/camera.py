@@ -43,7 +43,7 @@ class Camera:
             glOrtho(-offset, self.gameArea[0] + offset, -offset, self.gameArea[1] + offset, -5, 10)
             glRotate(0, 0, 0, 1)
         elif (self.mode == CM_Perspective):
-            gluPerspective(120.0, self.viewport[0]/float(self.viewport[1]), 1, 100.0)
+            gluPerspective(120.0, self.viewport[0]/float(self.viewport[1]), 1, max(self.viewport[0], self.viewport[1]))
             glRotate(-70, 1, 0, 0) # set camera from behind
             distanceFromPlayer = 5
             adjustmentX = 0
