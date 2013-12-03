@@ -103,18 +103,21 @@ class Player:
                if(self.y in trailMatrix[self.x]):
                  self.killed = True	
 				 
-    def robotStep(self, trailMatrix, enabled = True):
+    def robotStep(self, trailMatrix, player, enabled = True):
         if(not trailMatrix.has_key(self.x)):
            trailMatrix[self.x] = [self.y]
         else:
            trailMatrix[self.x].append(self.y)
-#        print "{0}".format(self.trailMatrix[self.x])
         if((self.x > 200 or self.x < 0) or (self.y > 200 or self.y < 0)):
             self.killed = True
         else:			
             if (not enabled):
               return
             increment = 0.5
+            if(player.x <= self.x) and (player.y < self.y):
+              if(self.direction.current() == NORTH):
+                  self.steerLeft()
+				  
             if (self.direction.current() == NORTH):
                  self.y += increment
             elif (self.direction.current() == SOUTH):
@@ -127,7 +130,24 @@ class Player:
             if(trailMatrix.has_key(self.x)):
                if(self.y in trailMatrix[self.x]):
                  self.killed = True	
-    
+   
+    def removeTrail(self, trailMatrix):
+       i = 0
+       while(i <= len(self.trailPoints) - 2):
+            if(self.trailPoints[i][0] == self.trailPoints[i+1][0]):
+              y_min = min(self.trailPoints[i][1], self.trailPoints[i+1][1])
+              while(y_min <= max(self.trailPoints[i][1], self.trailPoints[i+1][1])):
+                if(y_min in trailMatrix[self.trailPoints[i][0]]):
+                     trailMatrix[self.trailPoints[i][0]].remove(y_min)
+                y_min += 0.5
+            else:
+              x_min = min(self.trailPoints[i][0], self.trailPoints[i+1][0])
+              while(x_min <= max(self.trailPoints[i][1], self.trailPoints[i+1][1])):
+                 if(self.trailPoints[i][1] in trailMatrix[x_min]):
+                    trailMatrix[x_min].remove(self.trailPoints[i][1])
+              x_min += 0.5
+            i += 1	   
+       
     def reset(self, x, y, trailMatrix):
         self.x = x
         self.y = y

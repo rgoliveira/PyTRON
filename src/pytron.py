@@ -149,7 +149,9 @@ def run():
         if(not player.was_killed()):
             player.step(trailMatrix, playerEnabled)
             if(not enemy.was_killed()):
-               enemy.robotStep(trailMatrix, playerEnabled)
+               enemy.robotStep(trailMatrix, player, playerEnabled)
+            else:
+               enemy.removeTrail(trailMatrix)
         else:
            global trailMatrix 
            trailMatrix = {}
