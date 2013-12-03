@@ -109,7 +109,11 @@ class Player:
             if(self.x == self.trailPoints[i][0] and self.x == self.trailPoints[i+1][0]):
                if(self.y >= self.trailPoints[i][1] and self.y <= self.trailPoints[i+1][1]) or (self.y >= self.trailPoints[i+1][1] and self.y <= self.trailPoints[i][1]):
                     crashed = True
-                    print "player crashed at {0} {1}".format(self.trailPoints[i][0], self.trailPoints[i+1][0])
+                    print "player crashed at {0} {1}".format(self.x, self.y)
+            if(self.y == self.trailPoints[i][1] and self.y == self.trailPoints[i+1][1]):
+               if(self.x >= self.trailPoints[i][0] and self.x <= self.trailPoints[i+1][0]) or (self.x >= self.trailPoints[i+1][0] and self.x <= self.trailPoints[i][0]):
+                    crashed = True
+                    print "player crashed at {0} {1}".format(self.x, self.y)
             i += 1           
 
     def reset(self):
