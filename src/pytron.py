@@ -96,11 +96,9 @@ def handleInputEvent(e):
         ### player
         # steer right
         elif e.key == K_d:
-            player.x += 1
             player.steerRight()
         # steer left
         elif e.key == K_a:
-            player.x -= 1
             player.steerLeft()
 
 def run():
