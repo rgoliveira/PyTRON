@@ -96,12 +96,37 @@ def handleInputEvent(e):
             camera.changeMode()
         
         ### player
-        # steer right
         elif e.key == K_d:
-            player.steerRight()
-        # steer left
+            if (camera.mode == CM_Perspective):
+                player.steerRight()
+            elif (camera.mode == CM_Ortho):
+                if (player.direction.current() == NORTH):
+                    player.steerRight()
+                elif (player.direction.current() == SOUTH):
+                    player.steerLeft()
+            
+        elif e.key == K_w:
+            if (camera.mode == CM_Ortho):
+                if (player.direction.current() == WEST):
+                    player.steerRight()
+                elif (player.direction.current() == EAST):
+                    player.steerLeft()
+
         elif e.key == K_a:
-            player.steerLeft()
+            if (camera.mode == CM_Perspective):
+                player.steerLeft()
+            elif (camera.mode == CM_Ortho):
+                if (player.direction.current() == NORTH):
+                    player.steerLeft()
+                elif (player.direction.current() == SOUTH):
+                    player.steerRight()
+            
+        elif e.key == K_s:
+            if (camera.mode == CM_Ortho):
+                if (player.direction.current() == WEST):
+                    player.steerLeft()
+                elif (player.direction.current() == EAST):
+                    player.steerRight()
 
 def run():
     setup()
