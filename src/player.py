@@ -88,6 +88,7 @@ class Player:
         self.saveTrailPoint()
         
     def step(self, enabled = True):
+
         if((self.x > 200 or self.x < 0) or (self.y > 200 or self.y < 0)):
             self.killed = True
         else:			
@@ -102,7 +103,14 @@ class Player:
                  self.x += increment
             elif (self.direction.current() == WEST):
                  self.x -= increment
-            
+        i = 1
+        crashed = False
+        while(i < len(self.trailPoints) - 1):
+            if(self.x == self.trailPoints[i][0] and self.x == self.trailPoints[i+1][0]):
+               if(self.y >= self.trailPoints[i][1] and self.y <= self.trailPoints[i+1][1]):
+                    crashed = True
+                    print "player crashed at {0} {1}".format(self.trailPoints[i][0], self.trailPoints[i+1][0])
+            i += 1           
 
     def reset(self):
         self.x = 0.
