@@ -29,7 +29,10 @@ def setup():
     clock   = pygame.time.Clock()
     
     global player
-    player  = Player()
+    player  = Player(0., 0.)
+    
+    global enemy
+    enemy = Player(200., 0.)
     
     global floor
     floor   = Floor(size=20, tileSize=10)
@@ -82,6 +85,8 @@ def render():
     # render game objects
     floor.draw()
     player.draw()
+    if(not enemy.was_killed()):
+       enemy.draw()
     
     # update screen
     pygame.display.flip()
@@ -140,8 +145,11 @@ def run():
         ### game logic
         if(not player.was_killed()):
             player.step(playerEnabled)
+            if(not enemy.was_killed()):
+               enemy.robotStep(playerEnabled)
         else:
-           player.reset()
+           player.reset(0.,0.)
+           enemy.reset(200.,0.)
            camera.bindToPlayer(player)
 
         ### drawing

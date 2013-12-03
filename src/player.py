@@ -57,10 +57,10 @@ def drawTrail(x1, y1, x2, y2, width = 5., height = 3., color = (1., 0., 0., 0.8)
     glPopMatrix()
 
 class Player:
-    def __init__(self):
+    def __init__(self, x, y):
         self.model = OBJ(Filenames.models.player, swapyz=True)
-        self.x = 3.
-        self.y = 3.
+        self.x = x
+        self.y = y
         self.z = 0.
         self.direction = Direction()
         self.trailPoints = []
@@ -103,10 +103,35 @@ class Player:
             if(self.trailMatrix.has_key(self.x)):
                if(self.y in self.trailMatrix[self.x]):
                  self.killed = True	
+				 
+    def robotStep(self, enabled = True):
+        if(not self.trailMatrix.has_key(self.x)):
+           self.trailMatrix[self.x] = [self.y]
+        else:
+           self.trailMatrix[self.x].append(self.y)
+#        print "{0}".format(self.trailMatrix[self.x])
+        if((self.x > 200 or self.x < 0) or (self.y > 200 or self.y < 0)):
+            self.killed = True
+        else:			
+            if (not enabled):
+              return
+            increment = 0.5
+            if (self.direction.current() == NORTH):
+                 self.y += increment
+            elif (self.direction.current() == SOUTH):
+                 self.y -= increment
+            elif (self.direction.current() == EAST):
+                 self.x += increment
+            elif (self.direction.current() == WEST):
+                 self.x -= increment
 
-    def reset(self):
-        self.x = 0.
-        self.y = 0.
+            if(self.trailMatrix.has_key(self.x)):
+               if(self.y in self.trailMatrix[self.x]):
+                 self.killed = True	
+    
+    def reset(self, x, y):
+        self.x = x
+        self.y = y
         self.z = 0.
         self.direction = Direction()
         self.trailPoints = []
