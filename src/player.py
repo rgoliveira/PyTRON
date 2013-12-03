@@ -3,7 +3,7 @@ from objloader import *
 from filenames import *
 from directions import *
 
-def drawTrail(x1, y1, x2, y2, width = 5., height = 3., color = (1., 0., 0., 1.), playerTrail = False):
+def drawTrail(x1, y1, x2, y2, width = 5., height = 3., color = (1., 0., 0., 0.8), playerTrail = False):
     glColor4f(color[0], color[1], color[2], color[3])
     glPushMatrix()
     
@@ -33,15 +33,6 @@ def drawTrail(x1, y1, x2, y2, width = 5., height = 3., color = (1., 0., 0., 1.),
             if (playerTrail):
                 x2 = min(x2+distanceFromPlayer, x1)
 
-    """
-    glBegin(GL_QUADS);
-    glVertex3f(x1, y1, 0.1);
-    glVertex3f(x1, y2, 0.1);
-    glVertex3f(x2, y2, 0.1);
-    glVertex3f(x2, y1, 0.1);
-    glEnd();
-    """
-
     glBegin(GL_QUADS);
     glVertex3f(x1, y1, height);
     glVertex3f(x1, y2, height);
@@ -68,8 +59,8 @@ def drawTrail(x1, y1, x2, y2, width = 5., height = 3., color = (1., 0., 0., 1.),
 class Player:
     def __init__(self):
         self.model = OBJ(Filenames.models.player, swapyz=True)
-        self.x = 0.
-        self.y = 0.
+        self.x = 3.
+        self.y = 3.
         self.z = 0.
         self.direction = Direction()
         self.trailPoints = []
