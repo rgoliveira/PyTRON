@@ -33,6 +33,9 @@ def setup():
     
     global enemy
     enemy = Player(200., 0.)
+
+    global trailMatrix
+    trailMatrix	= {}
     
     global floor
     floor   = Floor(size=20, tileSize=10)
@@ -144,12 +147,14 @@ def run():
 
         ### game logic
         if(not player.was_killed()):
-            player.step(playerEnabled)
+            player.step(trailMatrix, playerEnabled)
             if(not enemy.was_killed()):
-               enemy.robotStep(playerEnabled)
+               enemy.robotStep(trailMatrix, playerEnabled)
         else:
-           player.reset(0.,0.)
-           enemy.reset(200.,0.)
+           global trailMatrix 
+           trailMatrix = {}
+           player.reset(0.,0., trailMatrix)
+           enemy.reset(200.,0., trailMatrix)
            camera.bindToPlayer(player)
 
         ### drawing

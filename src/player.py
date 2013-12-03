@@ -66,7 +66,7 @@ class Player:
         self.trailPoints = []
         self.saveTrailPoint()
         self.killed = False
-        self.trailMatrix = {}
+        #self.trailMatrix = {}
         
     def saveTrailPoint(self):
         self.trailPoints.append((self.x, self.y))
@@ -79,12 +79,11 @@ class Player:
         self.direction.steerLeft()
         self.saveTrailPoint()
         
-    def step(self, enabled = True):
-        if(not self.trailMatrix.has_key(self.x)):
-           self.trailMatrix[self.x] = [self.y]
+    def step(self, trailMatrix, enabled = True):
+        if(not trailMatrix.has_key(self.x)):
+           trailMatrix[self.x] = [self.y]
         else:
-           self.trailMatrix[self.x].append(self.y)
-#        print "{0}".format(self.trailMatrix[self.x])
+           trailMatrix[self.x].append(self.y)
         if((self.x > 200 or self.x < 0) or (self.y > 200 or self.y < 0)):
             self.killed = True
         else:			
@@ -100,15 +99,15 @@ class Player:
             elif (self.direction.current() == WEST):
                  self.x -= increment
 
-            if(self.trailMatrix.has_key(self.x)):
-               if(self.y in self.trailMatrix[self.x]):
+            if(trailMatrix.has_key(self.x)):
+               if(self.y in trailMatrix[self.x]):
                  self.killed = True	
 				 
-    def robotStep(self, enabled = True):
-        if(not self.trailMatrix.has_key(self.x)):
-           self.trailMatrix[self.x] = [self.y]
+    def robotStep(self, trailMatrix, enabled = True):
+        if(not trailMatrix.has_key(self.x)):
+           trailMatrix[self.x] = [self.y]
         else:
-           self.trailMatrix[self.x].append(self.y)
+           trailMatrix[self.x].append(self.y)
 #        print "{0}".format(self.trailMatrix[self.x])
         if((self.x > 200 or self.x < 0) or (self.y > 200 or self.y < 0)):
             self.killed = True
@@ -125,11 +124,11 @@ class Player:
             elif (self.direction.current() == WEST):
                  self.x -= increment
 
-            if(self.trailMatrix.has_key(self.x)):
-               if(self.y in self.trailMatrix[self.x]):
+            if(trailMatrix.has_key(self.x)):
+               if(self.y in trailMatrix[self.x]):
                  self.killed = True	
     
-    def reset(self, x, y):
+    def reset(self, x, y, trailMatrix):
         self.x = x
         self.y = y
         self.z = 0.
@@ -137,7 +136,7 @@ class Player:
         self.trailPoints = []
         self.saveTrailPoint()	
         self.killed = False
-        self.trailMatrix = {}
+        trailMatrix = {}
 		
 
     def was_killed(self):
