@@ -107,7 +107,7 @@ class Player:
         crashed = False
         while(i < len(self.trailPoints) - 1):
             if(self.x == self.trailPoints[i][0] and self.x == self.trailPoints[i+1][0]):
-               if(self.y >= self.trailPoints[i][1] and self.y <= self.trailPoints[i+1][1]):
+               if(self.y >= self.trailPoints[i][1] and self.y <= self.trailPoints[i+1][1]) or (self.y >= self.trailPoints[i+1][1] and self.y <= self.trailPoints[i][1]):
                     crashed = True
                     print "player crashed at {0} {1}".format(self.trailPoints[i][0], self.trailPoints[i+1][0])
             i += 1           
