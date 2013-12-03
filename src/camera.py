@@ -59,11 +59,4 @@ class Camera:
             elif (self.direction.current() == WEST):
                 glRotate(-90, 0, 0, 1)
                 adjustmentX = -distanceFromPlayer
-            
-            #glTranslate(tx/20., ty/20., - zpos)
             glTranslate(-self.x + adjustmentX, -self.y + adjustmentY, - self.z)
-            #glRotate(ry, 1, 0, 0)
-        #glRotate(rx, 0, 0, 1)
-        
-        glEnable(GL_DEPTH_TEST)
-        
