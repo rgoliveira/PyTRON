@@ -14,7 +14,7 @@ def setup():
     pygame.init()
     viewport = (1024,768)
     pygame.display.set_mode(viewport, OPENGL | DOUBLEBUF)
-    glLightfv(GL_LIGHT0, GL_POSITION,   (-40, 200, 100, 0.0))
+    glLightfv(GL_LIGHT0, GL_POSITION,   (viewport[0]/2, 0, viewport[1]/2, 0.0))
     glLightfv(GL_LIGHT0, GL_AMBIENT,    (0.2, 0.2, 0.2, 1.0))
     glLightfv(GL_LIGHT0, GL_DIFFUSE,    (0.5, 0.5, 0.5, 1.0))
     glEnable(GL_LIGHT0)
@@ -22,6 +22,8 @@ def setup():
     glEnable(GL_COLOR_MATERIAL)
     glEnable(GL_DEPTH_TEST)
     glShadeModel(GL_SMOOTH)
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
     global clock
     clock   = pygame.time.Clock()
